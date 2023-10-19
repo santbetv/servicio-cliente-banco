@@ -1,10 +1,12 @@
 package com.devsu.serviciocliente.application.serviceimpl;
 
-
+import com.devsu.serviciocliente.application.dto.ClienteDTO;
 import com.devsu.serviciocliente.infrastructure.adapter.out.notification.Publisher;
 import com.devsu.serviciocliente.domain.port.out.db.IClienteService;
 import com.devsu.serviciocliente.infrastructure.adapter.out.db.repository.ClienteRepository;
 import com.devsu.serviciocliente.infrastructure.adapter.out.db.model.Cliente;
+import com.devsu.serviciocliente.infrastructure.common.exception.BussinesRuleException;
+import com.devsu.serviciocliente.infrastructure.common.exception.BussinesRuleValidationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 
 /**
  *
@@ -34,39 +37,17 @@ public class ClienteServiceImpl implements IClienteService {
         this.publisher = publisher;
     }
 
-//    @Override
-//    @Transactional(readOnly = true) //
-//    public Cliente findById(Long id) {
-//        Optional<Cliente> cliente = clienteRepository.findById(id);
-//        
-//        if (!cliente.isEmpty()) {
-//            List<Cuenta> cuentas = handleMessage.getCuentas();
-//            
-//            for (Cuenta cuenta : cuentas) {
-//                if (cuenta.getCliente().getIdCliente().equals(cliente.get().getIdCliente())) {
-//
-//                    cliente.get().setCuentas(cuentas);
-//                    //System.out.println("Cuenta válida: " + cuenta);
-//                }
-//            }
-//            return clienteRepository.findById(id).get();
-//        } else {
-//             throw new UnsupportedOperationException("Not supported yet.");
-//        }
-//    }
-    
     @Override
     @Transactional(readOnly = true) //
-    public Cliente findById(Long id) {
+    public Cliente findById(Long id) throws BussinesRuleException {
         Optional<Cliente> cliente = clienteRepository.findById(id);
         if (!cliente.isEmpty()) {
             return clienteRepository.findById(id).get();
         } else {
-             throw new UnsupportedOperationException("Not supported yet.");
+            BussinesRuleException exception = new BussinesRuleException(INFO_URL);
+            throw exception;
         }
     }
-
-    
 
     @Override
     @Transactional(readOnly = true) //
@@ -75,8 +56,13 @@ public class ClienteServiceImpl implements IClienteService {
     }
 
     @Override
-    @Transactional //
-    public Cliente save(Cliente clienteDTO){
+    @Transactional() //
+    public Cliente save(ClienteDTO clienteDTO, BindingResult result) throws BussinesRuleValidationException {
+
+        if (result.hasErrors()) {
+            BussinesRuleValidationException exception = new BussinesRuleValidationException(INFO_URL, result);
+            throw exception;
+        } else {
             Cliente c = new Cliente();
             c.setNombre(clienteDTO.getNombre());
             c.setGenero(clienteDTO.getGenero());
@@ -89,5 +75,46 @@ public class ClienteServiceImpl implements IClienteService {
             Cliente save = clienteRepository.save(c);
             publisher.send(save);
             return save;
+        }
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) throws BussinesRuleException {
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+        if (!cliente.isEmpty()) {
+            clienteRepository.delete(cliente.get());
+        } else {
+            BussinesRuleException exception = new BussinesRuleException(INFO_URL);
+            throw exception;
+        }
+    }
+
+    @Override
+    public void put(ClienteDTO clienteDTO, BindingResult result, Long id) throws BussinesRuleException, BussinesRuleValidationException {
+        Optional<Cliente> find = clienteRepository.findById(id);
+
+        if (!find.isEmpty()) {
+            if (result.hasErrors()) {
+                BussinesRuleValidationException exception = new BussinesRuleValidationException(INFO_URL, result);
+                throw exception;
+            } else {
+                find.get().setNombre(clienteDTO.getNombre());
+                find.get().setGenero(clienteDTO.getGenero());
+                find.get().setEdad(clienteDTO.getEdad());
+                find.get().setIdentificacion(clienteDTO.getIdentificacion());
+                find.get().setDireccion(clienteDTO.getDireccion());
+                find.get().setTelefono(clienteDTO.getTelefono());
+                find.get().setContrasena(clienteDTO.getContrasena());
+                find.get().setEstado(clienteDTO.getEstado());
+                Cliente save = clienteRepository.save(find.get());
+                clienteRepository.save(save);
+                //publisher.send(save);
+            }
+        } else {
+            BussinesRuleException exception = new BussinesRuleException(INFO_URL);
+            throw exception;
+        }
+
     }
 }
