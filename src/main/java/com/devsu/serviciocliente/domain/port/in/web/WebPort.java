@@ -6,7 +6,7 @@
 package com.devsu.serviciocliente.domain.port.in.web;
 
 import com.devsu.serviciocliente.application.dto.ClienteDTO;
-import com.devsu.serviciocliente.infrastructure.adapter.out.db.model.Cliente;
+import com.devsu.serviciocliente.infrastructure.adapter.out.db.model.ClienteEntity;
 import com.devsu.serviciocliente.infrastructure.common.exception.BussinesRuleException;
 import com.devsu.serviciocliente.infrastructure.common.exception.BussinesRuleValidationException;
 import jakarta.validation.Valid;
@@ -28,10 +28,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface WebPort {
    
     @GetMapping("/clientes/{id}")
-    public Cliente get(@PathVariable Long id) throws BussinesRuleException;
+    public ClienteEntity get(@PathVariable Long id) throws BussinesRuleException;
 
     @GetMapping("/clientes")
-    public List<Cliente> findAll();
+    public List<ClienteEntity> findAll();
 
     @PostMapping("/clientes")
     public ResponseEntity<?> post(@Valid @RequestBody ClienteDTO input, BindingResult result) throws  BussinesRuleValidationException;

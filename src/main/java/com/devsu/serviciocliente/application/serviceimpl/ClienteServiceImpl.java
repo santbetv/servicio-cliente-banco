@@ -4,7 +4,7 @@ import com.devsu.serviciocliente.application.dto.ClienteDTO;
 import com.devsu.serviciocliente.infrastructure.adapter.out.notification.Publisher;
 import com.devsu.serviciocliente.domain.port.out.db.IClienteService;
 import com.devsu.serviciocliente.infrastructure.adapter.out.db.repository.ClienteRepository;
-import com.devsu.serviciocliente.infrastructure.adapter.out.db.model.Cliente;
+import com.devsu.serviciocliente.infrastructure.adapter.out.db.model.ClienteEntity;
 import com.devsu.serviciocliente.infrastructure.common.exception.BussinesRuleException;
 import com.devsu.serviciocliente.infrastructure.common.exception.BussinesRuleValidationException;
 import java.util.List;
@@ -39,8 +39,8 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     @Transactional(readOnly = true) //
-    public Cliente findById(Long id) throws BussinesRuleException {
-        Optional<Cliente> cliente = clienteRepository.findById(id);
+    public ClienteEntity findById(Long id) throws BussinesRuleException {
+        Optional<ClienteEntity> cliente = clienteRepository.findById(id);
         if (!cliente.isEmpty()) {
             return clienteRepository.findById(id).get();
         } else {
@@ -51,19 +51,19 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     @Transactional(readOnly = true) //
-    public List<Cliente> findAll() {
+    public List<ClienteEntity> findAll() {
         return clienteRepository.findAll();
     }
 
     @Override
     @Transactional() //
-    public Cliente save(ClienteDTO clienteDTO, BindingResult result) throws BussinesRuleValidationException {
+    public ClienteEntity save(ClienteDTO clienteDTO, BindingResult result) throws BussinesRuleValidationException {
 
         if (result.hasErrors()) {
             BussinesRuleValidationException exception = new BussinesRuleValidationException(INFO_URL, result);
             throw exception;
         } else {
-            Cliente c = new Cliente();
+            ClienteEntity c = new ClienteEntity();
             c.setNombre(clienteDTO.getNombre());
             c.setGenero(clienteDTO.getGenero());
             c.setEdad(clienteDTO.getEdad());
@@ -72,7 +72,7 @@ public class ClienteServiceImpl implements IClienteService {
             c.setTelefono(clienteDTO.getTelefono());
             c.setContrasena(clienteDTO.getContrasena());
             c.setEstado(Boolean.TRUE);
-            Cliente save = clienteRepository.save(c);
+            ClienteEntity save = clienteRepository.save(c);
             publisher.send(save);
             return save;
         }
@@ -81,7 +81,7 @@ public class ClienteServiceImpl implements IClienteService {
     @Override
     @Transactional
     public void delete(Long id) throws BussinesRuleException {
-        Optional<Cliente> cliente = clienteRepository.findById(id);
+        Optional<ClienteEntity> cliente = clienteRepository.findById(id);
         if (!cliente.isEmpty()) {
             clienteRepository.delete(cliente.get());
         } else {
@@ -92,7 +92,7 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     public void put(ClienteDTO clienteDTO, BindingResult result, Long id) throws BussinesRuleException, BussinesRuleValidationException {
-        Optional<Cliente> find = clienteRepository.findById(id);
+        Optional<ClienteEntity> find = clienteRepository.findById(id);
 
         if (!find.isEmpty()) {
             if (result.hasErrors()) {
@@ -107,7 +107,7 @@ public class ClienteServiceImpl implements IClienteService {
                 find.get().setTelefono(clienteDTO.getTelefono());
                 find.get().setContrasena(clienteDTO.getContrasena());
                 find.get().setEstado(clienteDTO.getEstado());
-                Cliente save = clienteRepository.save(find.get());
+                ClienteEntity save = clienteRepository.save(find.get());
                 clienteRepository.save(save);
                 //publisher.send(save);
             }

@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @Entity 
 @Table(name = "clientes")
-public class Cliente extends Persona implements Serializable {
+public class ClienteEntity extends PersonaEntity implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

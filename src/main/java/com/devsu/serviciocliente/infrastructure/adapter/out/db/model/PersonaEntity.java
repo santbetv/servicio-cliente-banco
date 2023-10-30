@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @MappedSuperclass
-public class Persona implements Serializable  {
+public class PersonaEntity implements Serializable  {
 	
 	private String nombre;
 	private String genero;
