@@ -1,4 +1,4 @@
-# servicio-cuenta-movimiento-banco
+# servicio-cuenta-cliente
 Micro servicio de cuentas y movimiento asincrónica
 
 # Definicion de la Arquitectura principal para comunicación de Microservicios por Eventos para una entidad Bancaria
