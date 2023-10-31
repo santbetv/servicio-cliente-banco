@@ -44,6 +44,12 @@ Url de servicios para validar desde swagger funcionalidades más rápidas.
 - my_queue_cliente
 - my_queue_cuenta
 
+## Probar con docker-compose para ejecución
+
+docker-compose -f docker-compose-dev.yml up -d --force-recreate
+
+## Probar con comandos docker
+
 ## Realizar el pull de este micro cliente en la versión 0.0.2-SNAPSHOT:
 
 - docker pull santbetv/microservice-docker-serviciocliente:0.0.2-SNAPSHOT
