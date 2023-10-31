@@ -33,7 +33,7 @@ Url de servicios para validar desde swagger funcionalidades más rápidas.
 - http://localhost:8090/api/swagger-ui/index.html
 
 
-# Imagen de una persona cliente asincrónica, este conecta con rabbitMQ manejando colas, para funcionar con cuentas y movimientos.
+# Conectar con rabbitMQ manejando colas, para funcionar con clientes, cuentas y movimientos.
 
 ## Tener descargado rabbitMQ con: 
 
