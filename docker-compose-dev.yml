@@ -22,7 +22,7 @@ services:
  ##########################################################################
   micro-clientes:
     container_name: db-micro-clientes
-    image: 
+    image: santbetv/microservice-docker-serviciocliente:0.0.2-SNAPSHOT
     depends_on:
       - rabbitmq
     ports:
@@ -31,12 +31,13 @@ services:
        - JAVA_OPTS=
          -Xms256M 
          -Xmx256M
+         -DIP_RABBIT=172.17.0.2
  ##########################################################################     
  #micro-cuentamovimientos
  ########################################################################## 
   micro-cuentamovimientos:
     container_name: db-micro-cuentamovimientos
-    image: santbetv/microservice-docker-serviciocuentamovimiento:0.0.1-SNAPSHOT
+    image: santbetv/microservice-docker-serviciocuentamovimiento:0.0.2-SNAPSHOT
     depends_on:
       - rabbitmq
       - micro-clientes
@@ -46,3 +47,5 @@ services:
        - JAVA_OPTS=
          -Xms256M 
          -Xmx256M
+         -DIP_RABBIT=172.17.0.2
+         -DIP_CLIENTE=http://172.17.0.3:8089/api
