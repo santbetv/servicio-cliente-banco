@@ -1,0 +1,107 @@
+{
+    "contrasena": "1234",
+    "direccion": "Otavalo sn y principal",
+    "edad": "29",
+    "estado": true,
+    "genero": "M",
+    "identificacion": "1234",
+    "nombre": "Jose Lema",
+    "telefono": "098254785"
+}
+
+{
+    "contrasena": "5678",
+    "direccion": "Amazonas y NNUU",
+    "edad": "29",
+    "estado": true,
+    "genero": "F",
+    "identificacion": "5678",
+    "nombre": "Marianela Montalvo",
+    "telefono": "097548965"
+}
+
+{
+    "contrasena": "1245",
+    "direccion": "13 junio y Equinoccial",
+    "edad": "29",
+    "estado": true,
+    "genero": "M",
+    "identificacion": "1245",
+    "nombre": "Juan Osorio",
+    "telefono": "098874587"
+}
+------------------------------------
+
+{
+    "estado": true,
+    "idCliente": 1,
+    "numeroNuenta": "478758",
+    "saldoInicial": 2000,
+    "tipoCuenta": "Ahorro"
+}
+
+{
+    "estado": true,
+    "idCliente": 2,
+    "numeroNuenta": "225487",
+    "saldoInicial": 100,
+    "tipoCuenta": "Corriente"
+}
+
+{
+    "estado": true,
+    "idCliente": 3,
+    "numeroNuenta": "495878",
+    "saldoInicial": 0,
+    "tipoCuenta": "Ahorro"
+}
+
+{
+    "estado": true,
+    "idCliente": 2,
+    "numeroNuenta": "496825",
+    "saldoInicial": 540,
+    "tipoCuenta": "Ahorro"
+}
+
+{
+    "estado": true,
+    "idCliente": 1,
+    "numeroNuenta": "585545",
+    "saldoInicial": 1000,
+    "tipoCuenta": "Corriente"
+}
+
+-------------------------------------------
+
+{
+  "idCliente": 1,
+  "idCuenta": 1,
+  "tipoMovimiento": "RETIRO",
+  "valor": 575
+}
+
+{
+  "idCliente": 2,
+  "idCuenta": 2,
+  "tipoMovimiento": "DEPOSITO",
+  "valor": 600
+}
+
+{
+  "idCliente": 3,
+  "idCuenta": 3,
+  "tipoMovimiento": "DEPOSITO",
+  "valor": 150
+}
+
+{
+  "idCliente": 2,
+  "idCuenta": 4,
+  "tipoMovimiento": "RETIRO",
+  "valor": 540
+}
+
+
+
+
