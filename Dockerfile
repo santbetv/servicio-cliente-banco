@@ -8,6 +8,8 @@ ARG gid=1000
 # Create user and group with specified UID and GID
 RUN groupadd -g ${gid} ${group} && useradd -u ${uid} -g ${group} -s /bin/sh ${user}
 
+USER admin:cliente
+VOLUME /tmp
 # Set the working directory to /app
 WORKDIR /app
 
