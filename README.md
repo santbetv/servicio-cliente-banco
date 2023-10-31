@@ -40,6 +40,10 @@ Url de servicios para validar desde swagger funcionalidades más rápidas.
 ### latest RabbitMQ 3.12
 - docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.12-management
 
+## Crear colas
+- my_queue_cliente
+- my_queue_cuenta
+
 ## Realizar el pull de este micro cliente en la versión 0.0.2-SNAPSHOT:
 
 - docker pull santbetv/microservice-docker-serviciocliente:0.0.2-SNAPSHOT
