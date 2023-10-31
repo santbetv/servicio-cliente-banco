@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-<!--    <parent>
+    <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.1.4</version>
-        <relativePath/>  lookup parent from repository 
-    </parent>-->
+        <relativePath/>  <!-- lookup parent from repository -->
+    </parent>
     
     <groupId>com.devsu</groupId>
     <artifactId>serviciocliente</artifactId>
@@ -24,22 +24,7 @@
         <java.version>17</java.version>
         <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
         <org.lombo.version>1.18.24</org.lombo.version>
-    </properties>
-    
-    
-    <!-- Definir variables para ejecutar mas facil -->
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-    
+    </properties> 
     
     <dependencies>
         <dependency><!--RabbitMQ-Kafka-->
@@ -118,26 +103,24 @@
 
     <build>
         <plugins>
-            
+            <!--NO FUNCIONA ESTE PLUGIN DOCKER-->
 <!--            <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>${dockerfile-maven-version}</version>                               
+                <version>1.4.13</version>
                 <executions>
-                    <execution>                        
-                        <id>build-docker-image</id>
-                        <phase>package</phase>
-                        <goals>                                              
+                    <execution>
+                        <id>default</id>
+                        <goals>
                             <goal>build</goal>
-                            <goal>push</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>                       
-                    <repository>santbetv/microservice-docker-${project.artifactId}</repository>
-                    <tag>${project.version}</tag>
+                <configuration>
+                    <repository>nombre-de-tu-imagen</repository>
+                    <tag>tag</tag>
                     <buildArgs>
-                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                        <JAR_FILE>target/*.jar</JAR_FILE>
                     </buildArgs>
                 </configuration>
             </plugin>-->
@@ -173,36 +156,19 @@
                 </configuration>
             </plugin>
             
-            <!--Tghis plugin generate reports in two differents forma .txt and xml 
-            in test phase when build life cicle is execuite-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-                <configuration>
-                    <useSystemClassLoader>false</useSystemClassLoader>                    
-                </configuration>
-            </plugin>
-            <!--It is the spring-boot repackage goal that repackages the JAR produced 
-            by maven to specify the main class and make it executable using an embedded container-->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>     
-                <version>${spring-boot.version}</version>      
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            
-            
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
+            
         </plugins>
     </build>
 
