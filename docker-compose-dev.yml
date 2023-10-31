@@ -17,6 +17,8 @@ services:
     environment:
        - RABBITMQ_DEFAULT_USER=guest
        - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - microservicio-cliente_default
  ##########################################################################     
  #micro-clientes
  ##########################################################################
@@ -31,7 +33,9 @@ services:
        - JAVA_OPTS=
          -Xms256M 
          -Xmx256M
-         -DIP_RABBIT=172.17.0.2
+         -DIP_RABBIT=rabbitmq
+    networks:
+      - microservicio-cliente_default
  ##########################################################################     
  #micro-cuentamovimientos
  ########################################################################## 
@@ -47,5 +51,12 @@ services:
        - JAVA_OPTS=
          -Xms256M 
          -Xmx256M
-         -DIP_RABBIT=172.17.0.2
-         -DIP_CLIENTE=http://172.17.0.3:8089/api
+         -DIP_RABBIT=rabbitmq
+         -DIP_CLIENTE=http://micro-clientes:8089/api 
+    networks:
+      - microservicio-cliente_default
+
+networks:
+  microservicio-cliente_default:
+    driver: bridge
+    name: microservicio-cliente_default
