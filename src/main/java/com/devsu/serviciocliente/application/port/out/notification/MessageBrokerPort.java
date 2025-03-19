@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.devsu.serviciocliente.application.port.in.notification;
+package com.devsu.serviciocliente.application.port.out.notification;
 
 /**
- *
  * @author rizzoli
  */
 public interface MessageBrokerPort {

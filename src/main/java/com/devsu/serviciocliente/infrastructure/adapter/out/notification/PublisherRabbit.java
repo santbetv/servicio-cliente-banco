@@ -5,7 +5,7 @@
  */
 package com.devsu.serviciocliente.infrastructure.adapter.out.notification;
 
-import com.devsu.serviciocliente.application.port.in.notification.MessageBrokerPort;
+import com.devsu.serviciocliente.application.port.out.notification.MessageBrokerPort;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
