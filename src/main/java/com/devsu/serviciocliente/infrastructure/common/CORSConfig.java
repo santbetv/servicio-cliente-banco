@@ -7,6 +7,7 @@ package com.devsu.serviciocliente.infrastructure.common;
 
 import java.time.Duration;
 import java.util.Arrays;
+
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,12 +18,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 /**
- *
  * @author rizzoli
  */
 @Configuration
-public class CORSConfiguration {
-    
+public class CORSConfig {
+
     //This Handlers implement the CorsConfigurationSource interface in order to provide a CorsConfiguration for each request.
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
@@ -52,5 +52,5 @@ public class CORSConfiguration {
         return bean;
 
     }
-    
+
 }

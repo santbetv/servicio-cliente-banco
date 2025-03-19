@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.devsu.serviciocliente.domain.port.in.mapper;
+package com.devsu.serviciocliente.application.port.in.mapper;
 
-import com.devsu.serviciocliente.application.dto.ClienteDTO;
+import com.devsu.serviciocliente.domain.dto.ClienteDTO;
 import com.devsu.serviciocliente.infrastructure.adapter.out.db.model.ClienteEntity;
 import java.util.List;
 import org.mapstruct.InheritInverseConfiguration;

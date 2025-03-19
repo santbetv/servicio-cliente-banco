@@ -1,4 +1,4 @@
-package com.devsu.serviciocliente.application.dto;
+package com.devsu.serviciocliente.domain.dto;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;

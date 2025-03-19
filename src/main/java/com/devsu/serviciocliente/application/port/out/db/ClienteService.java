@@ -1,6 +1,6 @@
-package com.devsu.serviciocliente.domain.port.out.db;
+package com.devsu.serviciocliente.application.port.out.db;
 
-import com.devsu.serviciocliente.application.dto.ClienteDTO;
+import com.devsu.serviciocliente.domain.dto.ClienteDTO;
 import com.devsu.serviciocliente.infrastructure.adapter.out.db.model.ClienteEntity;
 import com.devsu.serviciocliente.infrastructure.common.exception.BussinesRuleException;
 import com.devsu.serviciocliente.infrastructure.common.exception.BussinesRuleValidationException;
@@ -11,7 +11,7 @@ import org.springframework.validation.BindingResult;
  *
  * @author Santiago Betancur
  */
-public interface IClienteService {
+public interface ClienteService {
 
     public ClienteEntity findById(Long id) throws BussinesRuleException;
 

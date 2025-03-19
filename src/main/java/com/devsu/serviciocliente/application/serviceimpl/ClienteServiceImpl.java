@@ -1,12 +1,14 @@
 package com.devsu.serviciocliente.application.serviceimpl;
 
-import com.devsu.serviciocliente.application.dto.ClienteDTO;
+import com.devsu.serviciocliente.domain.Cliente;
+import com.devsu.serviciocliente.domain.dto.ClienteDTO;
 import com.devsu.serviciocliente.infrastructure.adapter.out.notification.Publisher;
-import com.devsu.serviciocliente.domain.port.out.db.IClienteService;
+import com.devsu.serviciocliente.application.port.out.db.ClienteService;
 import com.devsu.serviciocliente.infrastructure.adapter.out.db.repository.ClienteRepository;
 import com.devsu.serviciocliente.infrastructure.adapter.out.db.model.ClienteEntity;
 import com.devsu.serviciocliente.infrastructure.common.exception.BussinesRuleException;
 import com.devsu.serviciocliente.infrastructure.common.exception.BussinesRuleValidationException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -18,11 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 /**
- *
  * @author Santiago Betancur
  */
 @Service
-public class ClienteServiceImpl implements IClienteService {
+public class ClienteServiceImpl implements ClienteService {
 
     private static final Logger LOG = LoggerFactory.getLogger(ClienteServiceImpl.class);
 
@@ -60,9 +61,16 @@ public class ClienteServiceImpl implements IClienteService {
     public ClienteEntity save(ClienteDTO clienteDTO, BindingResult result) throws BussinesRuleValidationException {
 
         if (result.hasErrors()) {
-            BussinesRuleValidationException exception = new BussinesRuleValidationException(INFO_URL, result);
-            throw exception;
+            throw new BussinesRuleValidationException(INFO_URL, result);
         } else {
+            Cliente cliente = new Cliente(clienteDTO.getContrasena());
+            //Validadión de lodica del negocio core
+            boolean validarContra = cliente.esContrasenaSegura();
+
+            if (validarContra) {
+                LOG.info("Validando cliente en su contrasena segura");
+            }
+
             ClienteEntity c = new ClienteEntity();
             c.setNombre(clienteDTO.getNombre());
             c.setGenero(clienteDTO.getGenero());

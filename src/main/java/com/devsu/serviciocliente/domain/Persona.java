@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- *
  * @author rizzoli
  */
 @Getter
@@ -22,11 +21,11 @@ import lombok.Setter;
 @Builder
 public class Persona {
     
-    	private String nombre;
-	private String genero;
-	private String edad;
-	private String identificacion;
-	private String direccion;
-	private String telefono;
-    
+    private String nombre;
+    private String genero;
+    private String edad;
+    private String identificacion;
+    private String direccion;
+    private String telefono;
+
 }

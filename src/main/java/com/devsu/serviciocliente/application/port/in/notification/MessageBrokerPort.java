@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.devsu.serviciocliente.domain.port.in.mapper;
+package com.devsu.serviciocliente.application.port.in.notification;
 
 /**
  *
  * @author rizzoli
  */
-public interface ClienteRequestMapper {
-    
+public interface MessageBrokerPort {
+    public void send(Object message);
 }
