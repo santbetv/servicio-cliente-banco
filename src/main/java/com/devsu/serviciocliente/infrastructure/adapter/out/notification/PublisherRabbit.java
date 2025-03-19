@@ -11,17 +11,16 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
 /**
- *
  * @author rizzoli
  */
 @Component
 @EnableRabbit
-public class Publisher implements MessageBrokerPort{
+public class PublisherRabbit implements MessageBrokerPort {
 
 
     private RabbitTemplate rabbitTemplate;
 
-    public Publisher(RabbitTemplate rabbitTemplate) {
+    public PublisherRabbit(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 

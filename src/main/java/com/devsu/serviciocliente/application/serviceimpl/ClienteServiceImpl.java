@@ -2,7 +2,7 @@ package com.devsu.serviciocliente.application.serviceimpl;
 
 import com.devsu.serviciocliente.domain.Cliente;
 import com.devsu.serviciocliente.domain.dto.ClienteDTO;
-import com.devsu.serviciocliente.infrastructure.adapter.out.notification.Publisher;
+import com.devsu.serviciocliente.infrastructure.adapter.out.notification.PublisherRabbit;
 import com.devsu.serviciocliente.application.port.out.db.ClienteService;
 import com.devsu.serviciocliente.infrastructure.adapter.out.db.repository.ClienteRepository;
 import com.devsu.serviciocliente.infrastructure.adapter.out.db.model.ClienteEntity;
@@ -30,12 +30,12 @@ public class ClienteServiceImpl implements ClienteService {
     private final String INFO_URL = "api/cliente";
 
     private final ClienteRepository clienteRepository;
-    private Publisher publisher;
+    private final PublisherRabbit publisherRabbit;
 
     @Autowired
-    public ClienteServiceImpl(ClienteRepository clienteRepository, Publisher publisher) {
+    public ClienteServiceImpl(ClienteRepository clienteRepository, PublisherRabbit publisherRabbit) {
         this.clienteRepository = clienteRepository;
-        this.publisher = publisher;
+        this.publisherRabbit = publisherRabbit;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class ClienteServiceImpl implements ClienteService {
             c.setContrasena(clienteDTO.getContrasena());
             c.setEstado(Boolean.TRUE);
             ClienteEntity save = clienteRepository.save(c);
-            publisher.send(save);
+            publisherRabbit.send(save);
             return save;
         }
     }
